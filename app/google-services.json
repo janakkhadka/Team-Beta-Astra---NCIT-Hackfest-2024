@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "896592019128",
+    "project_id": "chat-app-79afd",
+    "storage_bucket": "chat-app-79afd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:896592019128:android:8238bfe0e5bef1c9bebe4d",
+        "android_client_info": {
+          "package_name": "com.janakkhadka.chatapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8HzbhoVZjzfb3kjGCkHpIuJhQKqL4Row"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:896592019128:android:557b0c4bb9a89f22bebe4d",
+        "android_client_info": {
+          "package_name": "compose.material.theme"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8HzbhoVZjzfb3kjGCkHpIuJhQKqL4Row"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
