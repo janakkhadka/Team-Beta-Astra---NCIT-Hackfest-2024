@@ -11,7 +11,13 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -219,7 +225,7 @@ private fun GradientButton(
 
 
 //name
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterName() {
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -256,7 +262,7 @@ fun RegisterName() {
 
 
 //phone
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterPhone() {
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -293,7 +299,7 @@ fun RegisterPhone() {
 
 
 //email id
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterEmail() {
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -329,7 +335,7 @@ fun RegisterEmail() {
 }
 
 //password
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterPassword() {
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -374,7 +380,7 @@ fun RegisterPassword() {
 }
 
 //password confirm
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterPasswordConfirm() {
     val keyboardController = LocalSoftwareKeyboardController.current
