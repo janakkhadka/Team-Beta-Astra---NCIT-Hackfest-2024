@@ -1,7 +1,6 @@
 package compose.material.theme
 
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,7 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.FirebaseApp
-import compose.material.theme.ui.theme.Material3ComposeTheme
+import compose.material.theme.policeUI.PolicePage
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +24,6 @@ class MainActivity : ComponentActivity() {
             ) {
                 //LoginApplication()
                 HomePage()
-
 
                 //initializing firebase
                 FirebaseApp.initializeApp(this)
