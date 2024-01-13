@@ -1,4 +1,4 @@
-package compose.material.theme.policeUI
+package com.example.policeside
 
 import android.annotation.SuppressLint
 import android.os.Build.VERSION.SDK_INT
@@ -63,7 +63,6 @@ import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
-import compose.material.theme.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "SuspiciousIndentation")
@@ -369,7 +368,7 @@ fun PolicePage(){
                         )
 
                         //notification 2
-                        Text("Notification 1",
+                        Text("Notification 2",
                             modifier = Modifier
                                 .width(350.dp)
                                 .height(55.dp)

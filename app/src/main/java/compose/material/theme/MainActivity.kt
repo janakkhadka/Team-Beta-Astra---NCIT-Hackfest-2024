@@ -12,9 +12,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.FirebaseApp
-import compose.material.theme.policeUI.PolicePage
 
-class MainActivity : ComponentActivity() {
+open class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -22,8 +21,12 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colorScheme.background
             ) {
-                //LoginApplication()
-                HomePage()
+                LoginApplication()
+                //ABC().HomePage()
+
+
+
+
 
                 //initializing firebase
                 FirebaseApp.initializeApp(this)

@@ -1,11 +1,16 @@
 package compose.material.theme
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build.VERSION.SDK_INT
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 
@@ -68,21 +73,28 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.KeyboardType.Companion.Uri
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.app.ActivityCompat
 import androidx.navigation.NavController
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 
+//class added
+class ABC:MainActivity(){
+
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "SuspiciousIndentation")
 @Composable
 fun HomePage(){
+    var check by remember { mutableStateOf(false) }
+    var checkmap by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -248,11 +260,17 @@ fun HomePage(){
 
         }
 
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceEvenly,
+                modifier=Modifier.fillMaxHeight()
+            ){
 
             Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
+                horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically,
-                modifier=Modifier.padding(top=15.dp,bottom=2.dp)
+                modifier= Modifier
+                    .fillMaxWidth()
             ) {
 
                 //Map card
@@ -262,17 +280,9 @@ fun HomePage(){
                         contentColor = Color.White
                     ),
                     modifier = Modifier
-                        .width(193.dp)
+                        .width(180.dp)
                         .height(200.dp)
-                        .clip(
-                            RoundedCornerShape(
-                                topStart = 0.dp,
-                                topEnd = 0.dp,
-                                bottomStart = 30.dp,
-                                bottomEnd = 30.dp
-                            )
-                        )
-                        .padding(horizontal = 15.dp)
+                        .clickable { checkmap=true }
                 ){
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -290,26 +300,41 @@ fun HomePage(){
                     }
 
                 }
+                if(checkmap==true){
+                    if (ActivityCompat.checkSelfPermission(
+                            LocalContext.current,
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                        ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                            LocalContext.current,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        ) != PackageManager.PERMISSION_GRANTED
+                    ) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return@Column
+                    }
+                    CurrentLocationContent(true)
+                }
 
                 //Calling card
                 Card(
                     colors = CardDefaults.cardColors(
                         containerColor = Color(0xff3b4995),
-                        contentColor = Color.White
+                        contentColor = Color.White,
                     ),
                     modifier = Modifier
-                        .width(193.dp)
+                        .width(180.dp)
                         .height(200.dp)
-                        .clip(
-                            RoundedCornerShape(
-                                topStart = 0.dp,
-                                topEnd = 0.dp,
-                                bottomStart = 30.dp,
-                                bottomEnd = 30.dp
-                            )
-                        )
-                        .padding(horizontal = 10.dp)
+                        .clickable { check = true }
                 ){
+
+
+
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center,
@@ -318,38 +343,36 @@ fun HomePage(){
                             .fillMaxHeight()
                     ) {
                         Icon(Icons.Default.Call, contentDescription = "Call",
-                            modifier=Modifier.size(66.dp))
+                            modifier=Modifier.size(66.dp)
+                                )
 
                         Text(text = "Call Now",
                             fontSize = 27.sp)
                     }
 
                 }
+                if(check==true){
+                    initiatePhoneCall("9840989641")
+                }
             }
+
+            //feedback section
             Card(
                 colors = CardDefaults.cardColors(
                     containerColor = Color(0xff3b4995),
                     contentColor = Color.White
                 ),
                 modifier = Modifier
-                    .width(405.dp)
-                    .height(200.dp)
-                    .clip(
-                        RoundedCornerShape(
-                            topStart = 0.dp,
-                            topEnd = 0.dp,
-                            bottomStart = 30.dp,
-                            bottomEnd = 30.dp
-                        )
-                    )
+                    .width(425.dp)
+                    .height(230.dp)
                     .padding(horizontal = 15.dp)
-                    .padding(top = 10.dp)
             ){
 
 
                 //feedback section
                 Column (
                     horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier=Modifier.fillMaxHeight().fillMaxWidth()
                 ){
 
                     var text by remember{mutableStateOf("")}
@@ -363,7 +386,7 @@ fun HomePage(){
                     onValueChange = { text = it },
                     modifier = Modifier
                         .width(365.dp)
-                        .height(100.dp)
+                        .height(140.dp)
                         .padding(bottom = 5.dp)
                         .padding(horizontal = 10.dp),
                     colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -393,14 +416,25 @@ fun HomePage(){
 
 
             }
+                Card(
+                    modifier = Modifier.fillMaxWidth().height(60.dp)
+                ){
+
+                }
+        }
         }
     }
 }
-
-
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewHome(){
-    HomePage()
 }
+
+
+@Composable
+fun initiatePhoneCall(phone: String) {
+    val intent = Intent(Intent.ACTION_DIAL, android.net.Uri.parse("tel:$phone"))
+    val context = LocalContext.current
+    context.startActivity(intent)
+}
+
+
+
+

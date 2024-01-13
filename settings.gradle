@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "Authentication App"
 include ':app'
 
+include ':app:policeside'

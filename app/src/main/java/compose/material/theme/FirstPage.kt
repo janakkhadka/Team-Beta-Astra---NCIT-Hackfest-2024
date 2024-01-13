@@ -108,20 +108,34 @@ fun FirstPage(navController: NavController) {
                 rememberScrollState(),
             ).padding(vertical = 65.dp)
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.user_reg),
-            contentDescription = null,
-            contentScale = ContentScale.Fit,
+        Column (
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .height(180.dp)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(bottom = 10.dp),
 
+            ){
+
+
+            Text(
+                "गोरेटो",
+                fontSize = 50.sp,
+
+                )
+            Text(
+                "''तपाई हाम्रै साथी''",
+                fontSize = 20.sp
             )
-        Text(text = "Terms and Condtions:" +"\n"+"\n"+
-                "\n1. Your real time location will be shared with the police station." +"\n"+
+        }
+        Text(text = "Terms and Condtions:" +"\n"+"\n"
+                ,Modifier.padding(horizontal = 35.dp).padding(top=45.dp)
+
+        )
+        Text(text =
+                "1. Your real time location will be shared with the police station." +"\n"+
                 "\n2. Your basic info will be shared." +"\n"+
                 "\n3. This system will not be responsible for any problem that you face by using this app."+
-                "\n",Modifier.padding(horizontal = 35.dp, vertical = 30.dp)
+                "\n",Modifier.padding(horizontal = 35.dp)
 
         )
         Checkbox(
