@@ -7,6 +7,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build.VERSION.SDK_INT
+import android.provider.MediaStore
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -153,7 +156,9 @@ fun HomePage(){
                             )
                         )
                         ,
-                        onClick = {  },
+                        onClick = {
+
+                        },
                         containerColor = Color(0xffed1c24),
                         //containerColor = Color.White,
                         contentColor = Color.White

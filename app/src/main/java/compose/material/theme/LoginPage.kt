@@ -52,8 +52,8 @@ import com.google.firebase.ktx.Firebase
 
 
 
-var password by mutableStateOf("")
-var email by mutableStateOf("")
+private var password by mutableStateOf("")
+private var email by mutableStateOf("")
 
 var check: Boolean by mutableStateOf(true)
 
@@ -113,6 +113,7 @@ fun LoginPage(navController: NavController) {
                 Spacer(modifier = Modifier.height(8.dp))
                 if(check){
                     SimpleOutlinedTextFieldSample(MaterialTheme.colorScheme.primary,MaterialTheme.colorScheme.primary)
+
                 }else{
                     SimpleOutlinedTextFieldSample(Color.Red,Color.Red)
                 }

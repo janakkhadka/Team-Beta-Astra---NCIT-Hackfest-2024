@@ -21,8 +21,8 @@ open class MainActivity : ComponentActivity() {
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colorScheme.background
             ) {
-                LoginApplication()
-                //ABC().HomePage()
+                //LoginApplication()
+                ABC().HomePage()
 
 
 
@@ -39,7 +39,7 @@ open class MainActivity : ComponentActivity() {
     fun LoginApplication(){
         val navController = rememberNavController()
 
-        NavHost(navController = navController, startDestination = "first_page", builder = {
+        NavHost(navController = navController, startDestination = "", builder = {
             composable("first_page", content = { FirstPage(navController = navController) })
             composable("login_page", content = { LoginPage(navController = navController) })
             composable("register_page", content = { RegisterPage(navController = navController) })

@@ -1,8 +1,10 @@
 package compose.material.theme
 
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,6 +23,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -30,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
@@ -41,9 +45,22 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import compose.material.theme.ui.theme.navController
 
+private val auth: FirebaseAuth by lazy { Firebase.auth }
+var verify="^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}\$"
+var name by mutableStateOf("")
+var cpassword by mutableStateOf("")
+var phone by mutableStateOf("")
+var checked: Boolean by mutableStateOf(true)
+private var password by mutableStateOf("")
+private var email by mutableStateOf("")
 @Composable
 fun RegisterPage(navController: NavController) {
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -90,7 +107,8 @@ fun RegisterPage(navController: NavController) {
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .padding(top = 130.dp)
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                    ,
                     style = MaterialTheme.typography.headlineSmall,
                     color = MaterialTheme.colorScheme.primary,
                 )
@@ -115,6 +133,21 @@ fun RegisterPage(navController: NavController) {
 
 
                 Spacer(modifier = Modifier.padding(10.dp))
+                if(checked) {
+                    if (email.isEmpty() || password.isEmpty() || name.isEmpty() || phone.isEmpty()) {
+                        val text = "Must be filled, and password must be matched!"
+                        val duration = Toast.LENGTH_SHORT
+
+                        val toast = Toast.makeText(LocalContext.current, text, duration) // in Activity
+                        toast.show()
+
+                    }else {
+                        compose.material.theme.ui.theme.navController.navigate("login_page"){
+                            popUpTo(compose.material.theme.ui.theme.navController.graph.startDestinationId)
+                            launchSingleTop = true
+                        }
+                    }
+                }
                /* Button(
                     onClick = {},
                     modifier = Modifier
@@ -129,6 +162,7 @@ fun RegisterPage(navController: NavController) {
                     nameButton = "Create An Account",
                     roundedCornerShape = RoundedCornerShape(topStart = 30.dp,bottomEnd = 30.dp)
                 )
+
 
                 Spacer(modifier = Modifier.padding(10.dp))
                 androidx.compose.material3.TextButton(onClick = {
@@ -189,15 +223,19 @@ private fun GradientButton(
             .fillMaxWidth()
             .padding(start = 32.dp, end = 32.dp),
         onClick = {
-            //your code
-        },
-
+            compose.material.theme.ui.theme.navController.navigate("login_page"){
+                popUpTo(compose.material.theme.ui.theme.navController.graph.startDestinationId)
+                launchSingleTop = true
+                  }
+                  },
         contentPadding = PaddingValues(),
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent
         ),
         shape = RoundedCornerShape(cornerRadius)
     ) {
+
+
 
         Box(
             modifier = Modifier
@@ -211,7 +249,8 @@ private fun GradientButton(
                     brush = Brush.linearGradient(colors = gradientColors),
                     shape = RoundedCornerShape(cornerRadius)
                 )*/
-                .padding(horizontal = 16.dp, vertical = 8.dp),
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .clickable {  },
             contentAlignment = Alignment.Center
         ) {
             androidx.compose.material3.Text(
@@ -221,7 +260,10 @@ private fun GradientButton(
             )
         }
     }
+
 }
+
+
 
 
 //name
@@ -229,11 +271,10 @@ private fun GradientButton(
 @Composable
 fun RegisterName() {
     val keyboardController = LocalSoftwareKeyboardController.current
-    var text by rememberSaveable { mutableStateOf("") }
 
     OutlinedTextField(
-        value = text,
-        onValueChange = { text = it },
+        value = name,
+        onValueChange = { name = it },
         shape = RoundedCornerShape(topEnd =12.dp, bottomStart =12.dp),
         label = {
             Text("Name",
@@ -269,8 +310,8 @@ fun RegisterPhone() {
     var text by rememberSaveable { mutableStateOf("") }
 
     OutlinedTextField(
-        value = text,
-        onValueChange = { text = it },
+        value = phone,
+        onValueChange = { phone = it },
         shape = RoundedCornerShape(topEnd =12.dp, bottomStart =12.dp),
         label = {
             Text("Phone",
@@ -306,8 +347,8 @@ fun RegisterEmail() {
     var text by rememberSaveable { mutableStateOf("") }
 
     OutlinedTextField(
-        value = text,
-        onValueChange = { text = it },
+        value = email,
+        onValueChange = { email = it },
         shape = RoundedCornerShape(topEnd =12.dp, bottomStart =12.dp),
         label = {
             Text("Email Address",
@@ -387,8 +428,8 @@ fun RegisterPasswordConfirm() {
     var password by rememberSaveable { mutableStateOf("") }
     var passwordHidden by rememberSaveable { mutableStateOf(true) }
     OutlinedTextField(
-        value = password,
-        onValueChange = { password = it },
+        value = cpassword,
+        onValueChange = { cpassword = it },
         shape = RoundedCornerShape(topEnd =12.dp, bottomStart =12.dp),
         label = {
             Text("Confirm Password",
