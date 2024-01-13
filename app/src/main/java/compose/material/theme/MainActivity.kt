@@ -22,7 +22,7 @@ open class MainActivity : ComponentActivity() {
                 color = MaterialTheme.colorScheme.background
             ) {
                 //LoginApplication()
-                ABC().HomePage()
+                HomeApplication()
 
 
 
@@ -47,4 +47,17 @@ open class MainActivity : ComponentActivity() {
 
         })
     }
+    @Composable
+    fun HomeApplication(){
+        val navController = rememberNavController()
+
+        NavHost(navController = navController, startDestination = "home_page", builder = {
+            composable("home_page", content = { ABC().HomePage(navController = navController) })
+            composable("login_page", content = { LoginPage(navController = navController) })
+            composable("register_page", content = { RegisterPage(navController = navController) })
+            composable("reset_page", content = { ResetPage(navController = navController) })
+
+        })
+    }
+
 }

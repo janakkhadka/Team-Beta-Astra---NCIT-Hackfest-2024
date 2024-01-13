@@ -84,6 +84,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.app.ActivityCompat
 import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.GifDecoder
@@ -95,7 +98,7 @@ class ABC:MainActivity(){
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "SuspiciousIndentation")
 @Composable
-fun HomePage(){
+fun HomePage(navController: NavController){
     var check by remember { mutableStateOf(false) }
     var checkmap by remember { mutableStateOf(false) }
     Scaffold(
@@ -171,7 +174,10 @@ fun HomePage(){
 //                        Icon(imageVector = Icons.Default.Share, contentDescription = "share feedback")
 //                    }
 
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = { navController.navigate("reset_page"){
+                        popUpTo(navController.graph.startDestinationId)
+                        launchSingleTop = true
+                    } }) {
                         Icon(imageVector = Icons.Default.AccountCircle, contentDescription = "Account",
                         modifier=Modifier.size(50.dp))
                     }
@@ -431,6 +437,7 @@ fun HomePage(){
     }
 }
 }
+
 
 
 @Composable
